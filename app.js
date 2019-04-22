@@ -3,7 +3,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-//const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
@@ -81,8 +80,6 @@ app.use('/', indexRouter);
 app.use('/account', accountRouter);
 app.use('/homework', homeworkRouter);
 app.use('/ical', ical);
-
-
 
 
 // Start Server
