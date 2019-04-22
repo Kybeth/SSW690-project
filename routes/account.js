@@ -25,41 +25,17 @@ router.post('/register', [
         min: 1
     }),
     check('email').isEmail(),
-    //check('password').notEmpty(),
+    check('password').isLength({
+        min: 3
+    }),
 ], (req, res) => {
-
-    /*
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const password = req.body.password;
-    const password2 = req.body.password2;
-
-    req.checkBody('firstName', 'first name is required').notEmpty();
-    req.checkBody('lastName', 'last name is required').notEmpty();
-    req.checkBody('email', 'email is required').notEmpty();
-    req.checkBody('email', 'email is not valid').isEmail();
-    req.checkBody('password', 'password is required').notEmpty();
-    req.checkBody('password2', 'password does not match').equals(password);
-    */
-
     let errors = validationResult(req);
-
     if (!errors.isEmpty()) {
         return res.status(422).json({
             errors: errors.array()
         });
-        res.render('register', {
-            errors: errors
-        });
     } else {
         let newUser = new User({
-            /*
-            fistName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-            */
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -138,6 +114,5 @@ router.post('/settings', (req, res) => {
         }
     })
 });
-
 
 module.exports = router;
