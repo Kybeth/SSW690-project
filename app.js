@@ -7,26 +7,21 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
 
-/*
-mongoose.connect('mongodb://localhost/DuckMommyDB', {
-    useNewUrlParser: true
-});
-*/
 const config = require('./config/database');
 mongoose.connect(config.database, {
-    useNewUrlParser: true
+  useNewUrlParser: true
 });
 
 let db = mongoose.connection;
 
 // Check DB connection
 db.once('open', () => {
-    console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB');
 });
 
 // Check for DB errors
 db.on('error', (err) => {
-    console.log(err)
+  console.log(err)
 });
 
 // Init App
@@ -41,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }))
 
 // parse application/json
@@ -50,16 +45,16 @@ app.use(bodyParser.json())
 
 // Express Session Middleware
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
 }));
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
-    res.locals.messages = require('express-messages')(req, res);
-    next();
+  res.locals.messages = require('express-messages')(req, res);
+  next();
 });
 
 // Validator
@@ -72,8 +67,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('*', (req, res, next) => {
-    res.locals.user = req.user || null;
-    next();
+  res.locals.user = req.user || null;
+  next();
 })
 
 // Routes
