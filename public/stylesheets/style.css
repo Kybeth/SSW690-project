@@ -153,6 +153,10 @@ table {
     font-size: 1.3em;
 }
 
+label {
+    font-size: 1.3em;
+}
+
 /* Footer */
 #main-footer {
     margin-top: 1rem;
